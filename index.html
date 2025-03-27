@@ -121,36 +121,39 @@
         let score = 0;
 
         function showQuestion() {
-            const questionElement = document.getElementById("question");
-            const answersContainer = document.getElementById("answers");
-            const nextButton = document.getElementById("next-btn");
-            const questionImage = document.getElementById("question-image");
+    const questionElement = document.getElementById("question");
+    const answersContainer = document.getElementById("answers");
+    const nextButton = document.getElementById("next-btn");
+    const questionImage = document.getElementById("question-image");
 
-            questionElement.textContent = questions[currentQuestion].q;
-            answersContainer.innerHTML = "";
+    questionElement.textContent = questions[currentQuestion].q;
+    answersContainer.innerHTML = "";
 
-            // Lade das Bild entsprechend dem Fragenindex
-            const imageUrl = `/images/${currentQuestion + 1}.WEBP`;
-            questionImage.src = imageUrl;
+    // Update the image URL with the correct GitHub raw URL format
+    const imageUrl = `https://raw.githubusercontent.com/gotoradio/humboldt-skunk/refs/heads/main/images/${currentQuestion + 1}.WEBP`;
+    questionImage.src = imageUrl;
 
-            // Setzt das Bild auf unsichtbar, wenn es nicht gefunden wird
-            questionImage.onload = function() {
-                questionImage.style.display = 'block';
-            };
-            questionImage.onerror = function() {
-                questionImage.style.display = 'none';
-            };
+    // Set the image to be visible when it loads
+    questionImage.onload = function() {
+        questionImage.style.display = 'block';
+    };
+    
+    // If the image doesn't exist, hide it
+    questionImage.onerror = function() {
+        questionImage.style.display = 'none';
+    };
 
-            questions[currentQuestion].a.forEach((answer, index) => {
-                const button = document.createElement("button");
-                button.textContent = answer;
-                button.classList.add("answer");
-                button.onclick = () => selectAnswer(index);
-                answersContainer.appendChild(button);
-            });
+    // Create answer buttons
+    questions[currentQuestion].a.forEach((answer, index) => {
+        const button = document.createElement("button");
+        button.textContent = answer;
+        button.classList.add("answer");
+        button.onclick = () => selectAnswer(index);
+        answersContainer.appendChild(button);
+    });
 
-            nextButton.style.display = "none";
-        }
+    nextButton.style.display = "none";
+}
 
         function selectAnswer(selectedIndex) {
             const correctIndex = questions[currentQuestion].correct;
