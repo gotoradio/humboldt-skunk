@@ -11,12 +11,14 @@
         .answer { display: block; margin: 5px; padding: 10px; width: 100%; cursor: pointer; border: 1px solid #333; }
         .answer:hover { background-color: lightgray; }
         #next-btn { margin-top: 20px; padding: 10px; display: none; cursor: pointer; }
+        #question-image { width: 100%; max-width: 400px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
     <h1>Humboldt Skunk Quiz</h1>
     <div id="quiz-container">
+        <img id="question-image" src="" alt="Fragenbild">
         <div id="question" class="question"></div>
         <div id="answers"></div>
         <button id="next-btn">Nächste Frage</button>
@@ -44,9 +46,13 @@
             const questionElement = document.getElementById("question");
             const answersContainer = document.getElementById("answers");
             const nextButton = document.getElementById("next-btn");
+            const questionImage = document.getElementById("question-image");
 
             questionElement.textContent = questions[currentQuestion].q;
             answersContainer.innerHTML = "";
+
+            // Lade das Bild entsprechend dem Fragenindex
+            questionImage.src = `/images/${currentQuestion + 1}.WEBP`;
 
             questions[currentQuestion].a.forEach((answer, index) => {
                 const button = document.createElement("button");
