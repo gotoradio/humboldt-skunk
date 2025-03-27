@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humboldt Skunk Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        #quiz-container { max-width: 600px; margin: auto; }
+        .question { font-size: 20px; margin-bottom: 10px; }
+        .answer { display: block; margin: 5px; padding: 10px; width: 100%; cursor: pointer; border: 1px solid #333; }
+        .answer:hover { background-color: lightgray; }
+        #next-btn { margin-top: 20px; padding: 10px; display: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h1>Humboldt Skunk Quiz</h1>
+    <div id="quiz-container">
+        <div id="question" class="question"></div>
+        <div id="answers"></div>
+        <button id="next-btn">Nächste Frage</button>
+        <p id="score" style="margin-top: 20px;"></p>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "In welchem Land war Humboldt nicht?", a: ["Patagonien", "Venezuela", "Ecuador", "Mexico"], correct: 0 },
+            { q: "Wie nennt man den patagonischen Skunk in seiner Heimat?", a: ["Zorro patagónico", "Mofeta patagónica", "Gato con olor", "El Destructor del Olfato"], correct: 1 },
+            { q: "Wie verteidigt sich der Patagonische Skunk?", a: ["Er rennt weg und versteckt sich", "Er sprüht eine stinkende Substanz", "Er beißt zu", "Er schreit ganz laut"], correct: 1 },
+            { q: "Warum gibt es kaum Fressfeinde für den patagonischen Skunk?", a: ["Er ist zu schnell", "Er kann sich unter der Erde verstecken", "Sein Fleisch ist giftig", "Sein Geruch schreckt fast alle Raubtiere ab"], correct: 3 },
+            { q: "Welche dieser Aussagen ist falsch?", a: ["Der patagonische Skunk kann seinen Geruch gezielt auf Gegner sprühen", "Sein Geruch kann mehrere Tage an Kleidung haften bleiben", "Er kann einen Menschen mit bewusstlos werden lassen", "Er hebt seinen Schwanz, bevor er sprüht"], correct: 2 },
+            { q: "Welcher Geruch kommt dem Skunk-Sekret am nächsten?", a: ["Faule Eier und verbranntes Gummi", "Frische Blumen und Lavendel", "Ein altes, nasses Handtuch", "Zwiebeln mit Knoblauch"], correct: 0 },
+            { q: "Was macht der patagonische Skunk, bevor er sprüht?", a: ["Er klatscht mit seinen Vorderpfoten", "Er stampft mit den Hinterpfoten", "Er dreht sich mehrmals im Kreis", "Er zischt laut"], correct: 1 },
+            { q: "Was passiert, wenn zwei patagonische Skunks in einem Kampf ihr Spray gleichzeitig abfeuern?", a: ["Sie werden beide benommen und hören auf zu kämpfen", "Der Gestank hebt sich gegenseitig auf", "Sie kämpfen trotzdem weiter", "Der Geruch wird doppelt so schlimm"], correct: 0 },
+            { q: "Was ist der größte Feind des patagonischen Skunks?", a: ["Große Greifvögel", "Jaguare", "Menschen", "Schlangen"], correct: 2 },
+            { q: "Wie kann man das Humboldt Skunk konsumieren?", a: ["Fleisch Essen", "Inhalieren/ Rauchen", "Gekochtes Sekret Trinken", "Ausgeschiedene Kaffeebohnen"], correct: 1 }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function showQuestion() {
+            const questionElement = document.getElementById("question");
+            const answersContainer = document.getElementById("answers");
+            const nextButton = document.getElementById("next-btn");
+
+            questionElement.textContent = questions[currentQuestion].q;
+            answersContainer.innerHTML = "";
+
+            questions[currentQuestion].a.forEach((answer, index) => {
+                const button = document.createElement("button");
+                button.textContent = answer;
+                button.classList.add("answer");
+                button.onclick = () => selectAnswer(index);
+                answersContainer.appendChild(button);
+            });
+
+            nextButton.style.display = "none";
+        }
+
+        function selectAnswer(selectedIndex) {
+            const correctIndex = questions[currentQuestion].correct;
+            const answers = document.querySelectorAll(".answer");
+
+            answers.forEach((button, index) => {
+                if (index === correctIndex) {
+                    button.style.backgroundColor = "lightgreen";
+                } else {
+                    button.style.backgroundColor = "lightcoral";
+                }
+                button.disabled = true;
+            });
+
+            if (selectedIndex === correctIndex) {
+                score++;
+            }
+
+            document.getElementById("next-btn").style.display = "block";
+        }
+
+        document.getElementById("next-btn").addEventListener("click", () => {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                document.getElementById("quiz-container").innerHTML = `<h2>Quiz beendet!</h2><p>Dein Score: ${score} / ${questions.length}</p>`;
+            }
+        });
+
+        showQuestion();
+    </script>
+
+</body>
+</html>
