@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Humboldt Skunk Quiz</title>
-   <style>
-        /* Light Blue Theme Styles */
+    <style>
+        /* Dark Mode Styles with Light Blue Text */
         body {
             font-family: Arial, sans-serif;
-            background-color: #e0f7fa;
-            color: #00796b;
+            background-color: #121212;
+            color: #b3e5fc; /* Light blue text */
             text-align: center;
             padding: 20px;
         }
@@ -17,14 +17,14 @@
         #quiz-container {
             max-width: 600px;
             margin: auto;
-            background-color: #ffffff;
+            background-color: #1f1f1f;
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         h1 {
-            color: #00796b;
+            color: #80deea; /* Light blue header text */
             font-size: 36px;
             margin-bottom: 20px;
         }
@@ -32,7 +32,7 @@
         .question {
             font-size: 22px;
             margin-bottom: 15px;
-            color: #00796b;
+            color: #b3e5fc; /* Light blue text for questions */
         }
 
         .answer {
@@ -41,42 +41,41 @@
             padding: 12px;
             width: 100%;
             cursor: pointer;
-            border: 1px solid #00796b;
+            border: 1px solid #333;
             border-radius: 6px;
-            background-color: #ffffff;
-            color: #00796b;
+            background-color: #333;
+            color: #b3e5fc; /* Light blue text for answers */
             transition: background-color 0.3s, color 0.3s;
         }
 
         .answer:hover {
-            background-color: #00796b;
-            color: #ffffff;
+            background-color: #444;
+            color: #80deea; /* Light blue text on hover */
         }
 
         .answer:active {
-            background-color: #004d40;
-            color: #ffffff;
+            background-color: #555;
         }
 
         #next-btn {
             margin-top: 20px;
             padding: 12px;
-            background-color: #00796b;
+            background-color: #80deea; /* Light blue button */
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            color: #ffffff;
+            color: #121212;
             font-weight: bold;
             display: none;
             transition: background-color 0.3s;
         }
 
         #next-btn:hover {
-            background-color: #004d40;
+            background-color: #4fb3bf;
         }
 
         #next-btn:active {
-            background-color: #004d40;
+            background-color: #26a69a;
         }
 
         #question-image {
