@@ -134,11 +134,13 @@
             const imageUrl = `/images/${currentQuestion + 1}.WEBP`;
             questionImage.src = imageUrl;
 
-            if (!imageExists(imageUrl)) {
-                questionImage.style.display = 'none';
-            } else {
+            // Setzt das Bild auf unsichtbar, wenn es nicht gefunden wird
+            questionImage.onload = function() {
                 questionImage.style.display = 'block';
-            }
+            };
+            questionImage.onerror = function() {
+                questionImage.style.display = 'none';
+            };
 
             questions[currentQuestion].a.forEach((answer, index) => {
                 const button = document.createElement("button");
@@ -169,17 +171,6 @@
             }
 
             document.getElementById("next-btn").style.display = "block";
-        }
-
-        function imageExists(url) {
-            var img = new Image();
-            img.onload = function() {
-                return true;
-            };
-            img.onerror = function() {
-                return false;
-            };
-            img.src = url;
         }
 
         document.getElementById("next-btn").addEventListener("click", () => {
