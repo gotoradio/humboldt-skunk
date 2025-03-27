@@ -24,7 +24,7 @@
         }
 
         h1 {
-            color: #00bcd4; /* Light blue color */
+            color: #ffca28;
             font-size: 36px;
             margin-bottom: 20px;
         }
@@ -50,7 +50,7 @@
 
         .answer:hover {
             background-color: #444;
-            color: #00bcd4; /* Light blue color */
+            color: #ffca28;
         }
 
         .answer:active {
@@ -60,7 +60,7 @@
         #next-btn {
             margin-top: 20px;
             padding: 12px;
-            background-color: #00bcd4; /* Light blue color */
+            background-color: #ffca28;
             border: none;
             border-radius: 6px;
             cursor: pointer;
@@ -71,17 +71,18 @@
         }
 
         #next-btn:hover {
-            background-color: #0097a7; /* Darker light blue */
+            background-color: #ffb300;
         }
 
         #next-btn:active {
-            background-color: #007c91;
+            background-color: #e68900;
         }
 
         #question-image {
             width: 100%;
             max-width: 400px;
-            margin-bottom: 15px;
+            margin: 0 auto 15px;
+            display: block;
             border-radius: 8px;
         }
 
@@ -90,6 +91,7 @@
             font-size: 18px;
             font-weight: bold;
         }
+
     </style>
 </head>
 <body>
@@ -121,39 +123,39 @@
         let score = 0;
 
         function showQuestion() {
-    const questionElement = document.getElementById("question");
-    const answersContainer = document.getElementById("answers");
-    const nextButton = document.getElementById("next-btn");
-    const questionImage = document.getElementById("question-image");
+            const questionElement = document.getElementById("question");
+            const answersContainer = document.getElementById("answers");
+            const nextButton = document.getElementById("next-btn");
+            const questionImage = document.getElementById("question-image");
 
-    questionElement.textContent = questions[currentQuestion].q;
-    answersContainer.innerHTML = "";
+            questionElement.textContent = questions[currentQuestion].q;
+            answersContainer.innerHTML = "";
 
-    // Update the image URL with the correct GitHub raw URL format
-    const imageUrl = `https://raw.githubusercontent.com/gotoradio/humboldt-skunk/refs/heads/main/images/${currentQuestion + 1}.WEBP`;
-    questionImage.src = imageUrl;
+            // Update the image URL with the correct GitHub raw URL format
+            const imageUrl = `https://raw.githubusercontent.com/gotoradio/humboldt-skunk/refs/heads/main/images/${currentQuestion + 1}.WEBP`;
+            questionImage.src = imageUrl;
 
-    // Set the image to be visible when it loads
-    questionImage.onload = function() {
-        questionImage.style.display = 'block';
-    };
-    
-    // If the image doesn't exist, hide it
-    questionImage.onerror = function() {
-        questionImage.style.display = 'none';
-    };
+            // Set the image to be visible when it loads
+            questionImage.onload = function() {
+                questionImage.style.display = 'block';
+            };
+            
+            // If the image doesn't exist, hide it
+            questionImage.onerror = function() {
+                questionImage.style.display = 'none';
+            };
 
-    // Create answer buttons
-    questions[currentQuestion].a.forEach((answer, index) => {
-        const button = document.createElement("button");
-        button.textContent = answer;
-        button.classList.add("answer");
-        button.onclick = () => selectAnswer(index);
-        answersContainer.appendChild(button);
-    });
+            // Create answer buttons
+            questions[currentQuestion].a.forEach((answer, index) => {
+                const button = document.createElement("button");
+                button.textContent = answer;
+                button.classList.add("answer");
+                button.onclick = () => selectAnswer(index);
+                answersContainer.appendChild(button);
+            });
 
-    nextButton.style.display = "none";
-}
+            nextButton.style.display = "none";
+        }
 
         function selectAnswer(selectedIndex) {
             const correctIndex = questions[currentQuestion].correct;
